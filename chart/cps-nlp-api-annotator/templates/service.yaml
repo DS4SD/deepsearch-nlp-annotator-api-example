@@ -1,0 +1,26 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: {{ include "cps-nlp-api.fullname" . }}
+  labels:
+    {{- include "cps-nlp-api.labels" . | nindent 4 }}
+spec:
+  type: {{ .Values.service.type }}
+  ports:
+    - port: {{ .Values.service.port }}
+      targetPort: http
+      protocol: TCP
+      name: http
+{{ if .Values.instrumentation.active }}
+    - port: 9102
+      protocol: TCP
+      name: metrics
+    - port: {{ .Values.instrumentation.statsdPort }}
+      protocol: TCP
+      name: statsd-export-tcp
+    - port: {{ .Values.instrumentation.statsdPort }}
+      protocol: UDP
+      name: statsd-export-udp
+{{ end }}
+  selector:
+    {{- include "cps-nlp-api.selectorLabels" . | nindent 4 }}

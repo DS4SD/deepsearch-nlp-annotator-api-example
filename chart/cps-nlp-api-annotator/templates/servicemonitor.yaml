@@ -1,0 +1,15 @@
+{{- if .Values.instrumentation.useServiceMonitor -}}
+apiVersion: monitoring.coreos.com/v1
+kind: ServiceMonitor
+metadata:
+  name: {{ include "cps-nlp-api.fullname" . }}-servicemonitor
+  labels:
+    {{- include "cps-nlp-api.labels" . | nindent 4 }}
+spec:
+  endpoints:
+    - interval: 30s
+      port: "metrics"
+      scheme: http
+  selector:
+    {{- include "cps-nlp-api.selectorLabels" . | nindent 4 -}}
+{{- end -}}

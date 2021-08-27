@@ -1,0 +1,8 @@
+{
+  "nlp": {
+    "num_workers": {{ .Values.nlpApi.numWorkers | quote }}
+  },
+  "statsd": {
+    "port": {{ .Values.instrumentation.statsdPort | quote }}
+  }
+}

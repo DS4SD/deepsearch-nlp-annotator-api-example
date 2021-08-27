@@ -1,0 +1,91 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ include "cps-nlp-api.fullname" . }}
+  labels:
+    {{- include "cps-nlp-api.labels" . | nindent 4 }}
+spec:
+  replicas: {{ .Values.replicaCount }}
+  selector:
+    matchLabels:
+      {{- include "cps-nlp-api.selectorLabels" . | nindent 6 }}
+  template:
+    metadata:
+      annotations:
+        checksum/secret: {{ include (print $.Template.BasePath "/secret.yaml") . | sha256sum }}
+        checksum/configmap: {{ include (print $.Template.BasePath "/configmap.yaml") . | sha256sum }}
+      {{- with .Values.podAnnotations }}
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      labels:
+        {{- include "cps-nlp-api.selectorLabels" . | nindent 8 }}
+    spec:
+    {{- with .Values.imagePullSecrets }}
+      imagePullSecrets:
+        {{- toYaml . | nindent 8 }}
+    {{- end }}
+      serviceAccountName: {{ include "cps-nlp-api.serviceAccountName" . }}
+      securityContext:
+        {{- toYaml .Values.podSecurityContext | nindent 8 }}
+      containers:
+        {{- if .Values.instrumentation.active }}
+        - name: statsd-exporter
+          image: {{ .Values.instrumentation.statsdExporter.image }}
+          imagePullPolicy: Always
+          ports:
+            - name: metrics
+              containerPort: 9102
+            - name: listentcp
+              containerPort: {{ .Values.instrumentation.statsdPort }}
+              protocol: TCP
+            - name: listenudp
+              containerPort: {{ .Values.instrumentation.statsdPort }}
+              protocol: UDP
+          resources:
+            {{- toYaml .Values.instrumentation.resources | nindent 12 }}
+        {{- end }}
+        - name: api
+          securityContext:
+            {{- toYaml .Values.securityContext | nindent 12 }}
+          image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
+          imagePullPolicy: {{ .Values.image.pullPolicy }}
+          env:
+            - name: NLP_API_CONFIG_FILES
+              value: /opt/nlp-api/config/config.json,/opt/nlp-api/secrets/secret.config.json
+          ports:
+            - name: http
+              containerPort: 5000
+              protocol: TCP
+          volumeMounts:
+            - mountPath: /opt/nlp-api/config
+              name: config
+            - mountPath: /opt/nlp-api/secrets
+              name: secrets
+          resources:
+            {{- toYaml .Values.resources | nindent 12 }}
+
+      volumes:
+        - name: config
+          configMap:
+            name: {{ include "cps-nlp-api.fullname" . }}-config
+            items:
+              - key: config.json
+                path: config.json
+        - name: secrets
+          secret:
+            secretName: {{ include "cps-nlp-api.fullname" . }}-secrets
+            items:
+              - key: secret.config.json
+                path: secret.config.json
+    {{- with .Values.nodeSelector }}
+      nodeSelector:
+        {{- toYaml . | nindent 8 }}
+    {{- end }}
+    {{- with .Values.affinity }}
+      affinity:
+        {{- toYaml . | nindent 8 }}
+    {{- end }}
+    {{- with .Values.tolerations }}
+      tolerations:
+        {{- toYaml . | nindent 8 }}
+    {{- end }}

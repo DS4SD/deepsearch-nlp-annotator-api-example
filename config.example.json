@@ -1,0 +1,11 @@
+{
+  "auth": {
+    "api_key": "test 123"
+  },
+  "nlp": {
+    "num_workers": 2
+  },
+  "statsd": {
+    "port": 9125
+  }
+}

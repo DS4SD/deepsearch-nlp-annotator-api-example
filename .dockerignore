@@ -1,0 +1,9 @@
+config.json
+
+venv/
+.git/
+.gitignore
+chart/
+
+.vscode
+.idea

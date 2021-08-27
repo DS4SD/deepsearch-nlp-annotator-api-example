@@ -1,0 +1,348 @@
+openapi: '3.0.1'
+
+info:
+  title: 'NLP Annotator API'
+  version: '0.0.1'
+servers:
+  - url: /api/v1
+
+## No changes are needed below for a specific Annotator.
+
+paths:
+  /annotators:
+    get:
+      tags:
+        - Annotate
+      security:
+        - api_key: []
+      x-openapi-router-controller: nlp_annotator_api.server.controllers.annotate_controller
+      operationId: get_annotator_definitions
+      responses:
+        200:
+          description: 'Annotator definitions'
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: string
+
+  /annotators/{annotator}:
+    parameters:
+      - $ref: '#/components/parameters/AnnotatorType'
+    post:
+      security:
+        - api_key: []
+      tags:
+        - Annotate
+      x-openapi-router-controller: nlp_annotator_api.server.controllers.annotate_controller
+      operationId: run_nlp_annotator
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AnnotatorTextInput'
+      responses:
+        200:
+          description: "OK"
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TextAnnotationResult'
+
+components:
+  securitySchemes:
+    api_key:
+      type: apiKey
+      in: header
+      name: Authorization
+      x-apikeyInfoFunc: nlp_annotator_api.server.auth.check_apikey.check_apikey
+  parameters:
+    AnnotatorType:
+      name: annotator
+      in: path
+      schema:
+        type: string
+      required: true
+      description: Annotator type
+  schemas:
+    AnnotatorTextInput:
+      type: object
+      minProperties: 1
+      maxProperties: 1
+      properties:
+        find_entities:
+          description: Find entities in text
+          allOf:
+            - $ref: '#/components/schemas/BaseInput'
+            - $ref: '#/components/schemas/FindEntitiesParameters'
+        features:
+          type: object
+          description: "Get features"
+          properties:
+            entity_names:
+              description: "True if the supported entity names should be returned"
+              type: boolean
+            relationship_names:
+              description: "True if the supported relationship names should be returned"
+              type: boolean
+            property_names:
+              description: "True if the supported property names should be returned"
+              type: boolean
+            labels:
+              description: "True if the supported relationship entities should be returned"
+              type: boolean
+        find_relationships:
+          description: Find entity relationships in text
+          allOf:
+            - $ref: '#/components/schemas/BaseInput'
+            - $ref: '#/components/schemas/FindRelationshipsParameters'
+        find_properties:
+          description: Find entity properties in text
+          allOf:
+            - $ref: '#/components/schemas/BaseInput'
+            - $ref: '#/components/schemas/FindPropertiesParameters'
+
+    FindEntitiesParameters:
+      type: object
+      required:
+        - entity_names
+      properties:
+        entity_names:
+          $ref: '#/components/schemas/OptionalAnnotationKeySet'
+
+    FindRelationshipsParameters:
+      type: object
+      required:
+        - relationship_names
+        - entities
+      properties:
+        relationship_names:
+          $ref: '#/components/schemas/OptionalAnnotationKeySet'
+        entities:
+          type: array
+          description: >
+            Array of entity mappings, one item per text item in `texts`.
+          nullable: true
+          items:
+            $ref: '#/components/schemas/EntityMap'
+
+    FindPropertiesParameters:
+      type: object
+      required:
+        - property_names
+        - entities
+      properties:
+        property_names:
+          $ref: '#/components/schemas/OptionalAnnotationKeySet'
+        entities:
+          type: array
+          description: >
+            Array of entity mappings, one item per text item in `texts`.
+          nullable: true
+          items:
+            $ref: '#/components/schemas/EntityMap'
+
+    BaseInput:
+      type: object
+      properties:
+        object_type:
+          default: text
+          type: string
+          enum:
+            - text
+            - image
+            - table
+      discriminator:
+        propertyName: object_type
+        mapping:
+          text: 'TextInput'
+          image: 'ImageInput'
+          table: 'TableInput'
+
+    TextInput:
+      description: Text input
+      allOf:
+        - $ref: '#/components/schemas/BaseInput'
+        - type: object
+          properties:
+            texts:
+              type: array
+              items:
+                type: string
+          required:
+            - texts
+
+    ImageInput:
+      description: Image input
+      allOf:
+        - $ref: '#/components/schemas/BaseInput'
+        - type: object
+          properties:
+            images:
+              type: array
+              items:
+                type: object
+          required:
+            - images
+
+    TableCell:
+      type: object
+      properties:
+        bbox:
+          type: array
+          items:
+            type: number
+        spans:
+          type: array
+          items:
+            type: integer
+        text:
+          type: string
+        type:
+          type: string
+
+    TableInput:
+      description: Table input
+      allOf:
+        - $ref: '#/components/schemas/BaseInput'
+        - type: object
+          properties:
+            tables:
+              type: array
+              items:
+                type: array
+                items:
+                  $ref: '#/components/schemas/TableCell'
+          required:
+            - tables
+
+    EntityMap:
+      type: object
+      description: Mapping of entity-key to a list of matches.
+      additionalProperties:
+        type: array
+        items:
+          type: object
+          required:
+            - match
+            - range
+            - type
+          properties:
+            match:
+              type: string
+            original:
+              type: string
+            range:
+              type: array
+              items:
+                type: integer
+              minItems: 2
+              maxItems: 2
+            type:
+              type: string
+            subtype:
+              type: string
+
+    RelationshipTableMap:
+      type: object
+      description: Mapping of relationship-key to a table of matches.
+      additionalProperties:
+        type: object
+        properties:
+          header:
+            type: array
+            items:
+              type: string
+            minItems: 4
+            maxItems: 4
+          data:
+            type: array
+            items:
+              type: array
+              items:
+                anyOf:
+                  - type: string
+                  - type: string
+                  - type: number
+                  - type: string
+              minItems: 4
+              maxItems: 4
+        required:
+          - header
+          - data
+
+    PropertyMap:
+      type: object
+      description: Mapping of property-key to a dynamic property bag.
+      additionalProperties: {}
+
+    OptionalAnnotationKeySet:
+      type: array
+      nullable: true
+      uniqueItems: true
+      items:
+        type: string
+
+    TextAnnotationResult:
+      type: object
+      description: "Depends on the payload, one of 'entity_names', 'relationship_names', 'entities' or 'relationships' is required depending on the call."
+      properties:
+        entity_names:
+          $ref: '#/components/schemas/OptionalAnnotationKeySet'
+
+        relationship_names:
+          $ref: '#/components/schemas/OptionalAnnotationKeySet'
+
+        property_names:
+          $ref: '#/components/schemas/OptionalAnnotationKeySet'
+
+        entities:
+          type: array
+          items:
+            $ref: '#/components/schemas/EntityMap'
+
+        relationships:
+          type: array
+          items:
+            $ref: '#/components/schemas/RelationshipTableMap'
+
+        properties:
+          type: array
+          items:
+            $ref: '#/components/schemas/PropertyMap'
+
+    AnnotatorDefinition:
+      type: object
+      properties:
+        entities:
+          type: array
+          nullable: true
+          items:
+            $ref: '#/components/schemas/AnnotationDefinition'
+        relationships:
+          type: array
+          nullable: true
+          items:
+            $ref: '#/components/schemas/AnnotationDefinition'
+        properties:
+          type: array
+          nullable: true
+          items:
+            $ref: '#/components/schemas/AnnotationDefinition'
+      required:
+        - entities
+        - relationships
+        - properties
+
+    AnnotationDefinition:
+      type: object
+      properties:
+        key:
+          type: string
+        description:
+          type: string
+      required:
+        - key
+        - description
