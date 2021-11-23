@@ -7,5 +7,36 @@
   },
   "statsd": {
     "port": 9125
+  },
+  "redis_cache": {
+    "url": "redis://127.0.0.1:6379/0"
+  },
+  "watson_health_annotator": {
+    "api_url": "https://us-south.wh-acd.cloud.ibm.com/wh-acd/api",
+    "api_key": "",
+    "flow_name": "wh_acd.ibm_clinical_insights_v1.0_standard_flow",
+    "max_attempts": 5,
+    "timeout_seconds": 600,
+    "concepts": {
+      "umls.Organism": "",
+      "umls.AminoAcidPeptideOrProtein": "",
+      "umls.BiologicallyActiveSubstance": "",
+      "umls.OrganicChemical": "",
+      "umls.PharmacologicSubstance": "",
+      "umls.NucleicAcidNucleosideOrNucleotide": "",
+      "umls.GeneOrGenome": "ACE2",
+      "umls.Activity": "binding, containing, ...",
+      "umls.MolecularFunction": "binding, conformational changes, ...",
+      "umls.Virus": "",
+      "umls.GeographicArea": "China",
+      "umls.ImmunologicFactor": "spike protein, integrin",
+      "umls.DiseaseOrSyndrome": "common colds, SARS ...",
+      "umls.Receptor": "integrin",
+      "umls.PathologicFunction": "transmission, ...",
+      "umls.NaturalPhenomenonOrProcess": "transmission, ...",
+      "umls.NeoplasticProcess": "",
+      "icd10Code": ""
+    }
   }
 }
+

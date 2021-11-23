@@ -24,5 +24,5 @@ PATH=${PATH}:node_modules/.bin
 
 echo "Bundling Swagger 2.0 definitions..."
 
-swagger-cli validate ./openapi/index.yaml
-swagger-cli bundle -o ./openapi/bundled.json ./openapi/index.yaml
+swagger-cli validate ./nlp_annotator_api/resources/schemas/openapi.yaml
+swagger-cli bundle -o ./openapi/bundled.json ./nlp_annotator_api/resources/schemas/openapi.yaml
