@@ -7,7 +7,7 @@ aiohttp_jinja2~=1.2.0
 statsd~=3.3.0
 
 # NLP Packages
-spacy==2.2.4
+#spacy==2.2.4
 
 pydantic==1.8.2
 aioredis[hiredis]==2.0.0
