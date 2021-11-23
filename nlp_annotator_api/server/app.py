@@ -1,4 +1,5 @@
 import logging
+from nlp_annotator_api.server.middleware.redis_cache import redis_cache_factory
 import os
 
 import aiohttp.web
@@ -27,6 +28,7 @@ app.add_api("openapi.yaml", pass_context_arg_name="request")
 aiohttp_app: aiohttp.web.Application = app.app
 
 aiohttp_app.cleanup_ctx.append(statsd_client_factory(conf.statsd))
+aiohttp_app.cleanup_ctx.append(redis_cache_factory(conf))
 
 aiohttp_app.middlewares.append(StatsdMiddleware())
 

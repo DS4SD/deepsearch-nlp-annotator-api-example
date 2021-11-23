@@ -37,6 +37,29 @@ paths:
         - Annotate
       x-openapi-router-controller: nlp_annotator_api.server.controllers.annotate_controller
       operationId: run_nlp_annotator
+      parameters:
+        - name: X-CPS-Deadline
+          required: false
+          in: header
+          schema:
+            type: string
+            format: datetime
+        - name: X-CPS-Transaction-Id
+          required: false
+          in: header
+          schema:
+            type: string
+        - name: X-CPS-Attempt-Number
+          required: false
+          in: header
+          schema:
+            type: integer
+        - name: X-CPS-Max-Attempts
+          required: false
+          in: header
+          schema:
+            type: integer
+
       requestBody:
         required: true
         content:
