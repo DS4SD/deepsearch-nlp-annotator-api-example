@@ -13,6 +13,7 @@ from statsd import StatsClient
 from nlp_annotator_api.annotators.SimpleTextGeographyAnnotator import SimpleTextGeographyAnnotator
 from nlp_annotator_api.annotators.TextTableGeographyAnnotator import TextTableGeographyAnnotator
 from nlp_annotator_api.annotators.SimpleTextClassifier import SimpleTextClassifier
+from nlp_annotator_api.annotators.ScispacyBiomedAnnotator import ScispacyBiomedAnnotator
 from nlp_annotator_api.annotators.WatsonHealthAnnotator import WatsonHealthAnnotator
 
 
@@ -24,6 +25,7 @@ annotators = {
     'SimpleTextGeographyAnnotator': SimpleTextGeographyAnnotator(),
     'TextTableGeographyAnnotator': TextTableGeographyAnnotator(),
     'SimpleTextClassifier': SimpleTextClassifier(),
+    'ScispacyBiomedAnnotator': ScispacyBiomedAnnotator(),
     'WatsonHealthAnnotator': WatsonHealthAnnotator()
 }
 

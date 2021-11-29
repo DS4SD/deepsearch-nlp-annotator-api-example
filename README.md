@@ -30,6 +30,11 @@ The following properties are exposed in the small example (without actual AI mod
 | `length` | Length of provided text (paragraph, table cell etc.) classified as small, middle, or long |
 
 
+Additionally to the example dictionaries, the example API contains the following annotators which are wrapping state-of-the-art public models:
+- `ScispacyBiomedAnnotator`, see more in [./docs/models/Scispacy.md](./docs/models/Scispacy.md)
+- `WatsonHealthAnnotator`, see more in [./docs/models/WatsonHealthAnnotator.md](./docs/models/WatsonHealthAnnotator.md)
+
+
 ## Table of content
 
 - [Running the Annotator Application](#running-the-annotator-application)
