@@ -7,7 +7,26 @@ aiohttp_jinja2~=1.2.0
 statsd~=3.3.0
 
 # NLP Packages
-#spacy==2.2.4
+spacy~=3.0.0 # required for scispacy 0.4.0
+scispacy~=0.4.0
+
+# Scispacy models
+# A full spaCy pipeline for biomedical data with a ~100k vocabulary.
+# https://s3-us-west-2.amazonaws.com/ai2-s2-scispacy/releases/v0.4.0/en_core_sci_sm-0.4.0.tar.gz
+# A full spaCy pipeline for biomedical data with a ~360k vocabulary and 50k word vectors.
+https://s3-us-west-2.amazonaws.com/ai2-s2-scispacy/releases/v0.4.0/en_core_sci_md-0.4.0.tar.gz
+# A full spaCy pipeline for biomedical data with a ~785k vocabulary and 600k word vectors.
+# https://s3-us-west-2.amazonaws.com/ai2-s2-scispacy/releases/v0.4.0/en_core_sci_lg-0.4.0.tar.gz
+
+# A spaCy NER model trained on the CRAFT corpus.
+# https://s3-us-west-2.amazonaws.com/ai2-s2-scispacy/releases/v0.4.0/en_ner_craft_md-0.4.0.tar.gz
+# A spaCy NER model trained on the JNLPBA corpus.
+https://s3-us-west-2.amazonaws.com/ai2-s2-scispacy/releases/v0.4.0/en_ner_jnlpba_md-0.4.0.tar.gz
+# A spaCy NER model trained on the BC5CDR corpus.
+https://s3-us-west-2.amazonaws.com/ai2-s2-scispacy/releases/v0.4.0/en_ner_bc5cdr_md-0.4.0.tar.gz
+# A spaCy NER model trained on the BIONLP13CG corpus.
+# https://s3-us-west-2.amazonaws.com/ai2-s2-scispacy/releases/v0.4.0/en_ner_bionlp13cg_md-0.4.0.tar.gz
+
 
 pydantic==1.8.2
 aioredis[hiredis]==2.0.0
