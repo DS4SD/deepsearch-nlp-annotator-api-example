@@ -103,7 +103,7 @@ spec:
 
         ibmcloud login -a $(params.ibmcloud-api) -r $IBM_CLOUD_REGION --apikey $PIPELINE_BLUEMIX_API_KEY
 
-        ibmcloud target -g $(params.resource-group)
+        ibmcloud target -g "$(params.resource-group)"
 
         # View shuttle properties
         cat $(params.shuttle-properties-file)
@@ -136,7 +136,7 @@ spec:
         fi
 
         if ibmcloud ce app get -n $(params.app-name) | grep Age; then
-          echo "Code Engine app with name ${APP_NAME} found, updating it"
+          echo "Code Engine app with name $(params.app-name) found, updating it"
           ibmcloud ce app update -n $(params.app-name) \
             -i $(params.image-repository):$(params.image-tags) \
             --rs ${IMAGE_PULL_SECRET_NAME} \
