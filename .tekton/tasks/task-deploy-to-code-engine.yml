@@ -26,13 +26,13 @@ spec:
       default: "{}"
     - name: cpu
       description: number of vCPU of the Code Engine application
-      default: "0.25"
+      default: "0.5"
     - name: max-scale
       description: maximum scale of the Code Engine application
       default: "1"
     - name: memory
       description: total memory of the Code Engine application
-      default: "0.5G"
+      default: "2G"
     - name: port
       description: port where the application is listening
       default: "http1:5000"
