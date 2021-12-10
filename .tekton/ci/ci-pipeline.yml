@@ -50,7 +50,7 @@ spec:
       default: "{}"
     - name: port
       description: port where the application is listening
-      default: "http1:8080"
+      default: "http1:5000"
     - name: health-endpoint
       description: application health endpoint, e.g. /health
       default: ""

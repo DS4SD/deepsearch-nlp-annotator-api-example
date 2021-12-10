@@ -7,6 +7,7 @@ aiohttp_jinja2~=1.2.0
 statsd~=3.3.0
 
 # NLP Packages
+click~=7.1.2
 spacy~=3.0.0 # required for scispacy 0.4.0
 scispacy~=0.4.0
 

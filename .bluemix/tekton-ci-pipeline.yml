@@ -82,7 +82,7 @@ properties:
     value: ${SERVICE_BINDINGS}
   - name: port
     type: text
-    value: "http1:8080"
+    value: "http1:5000"
   - name: health-endpoint
     type: text
     value: "/health"
