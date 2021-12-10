@@ -85,7 +85,7 @@ properties:
     value: "http1:5000"
   - name: health-endpoint
     type: text
-    value: "/health"
+    value: "/api/v1/health"
   - name: pipeline-debug
     type: text
     value: "0"
