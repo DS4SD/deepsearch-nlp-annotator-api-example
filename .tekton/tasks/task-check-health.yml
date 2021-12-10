@@ -8,7 +8,7 @@ spec:
       description: application protocol + hostname, e.g. https://example.com
     - name: health-endpoint
       description: application health endpoint, e.g. /health
-      default: ""
+      default: "/api/v1/health"
     - name: pipeline-debug
       description: Pipeline debug mode
       default: "0"

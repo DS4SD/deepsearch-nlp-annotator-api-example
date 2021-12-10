@@ -9,6 +9,24 @@ servers:
 ## No changes are needed below for a specific Annotator.
 
 paths:
+  /health:
+    get:
+      tags:
+        - Health
+      x-openapi-router-controller: nlp_annotator_api.server.controllers.health_controller
+      operationId: health
+      responses:
+        200:
+          description: 'Health check'
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: string
+                required:
+                  - status
   /annotators:
     get:
       tags:
