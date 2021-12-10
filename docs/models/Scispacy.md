@@ -5,6 +5,7 @@ The example API provides the `ScispacyBiomedAnnotator` annotator which invokes m
 ScispaCy has multiple models which are tuned for finding different entities. A full list is available on the page https://allenai.github.io/scispacy/.
 When a model is enabled in the example API, its entities are available for the text annotations.
 
+Note that some models might require a non-trivial amount of memory for loading and running. When enabling more models, make sure to increase the memory limits of your environment accordingly.
 
 
 ## Querying Annotator Capabilities

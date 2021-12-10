@@ -15,14 +15,14 @@ scispacy~=0.4.0
 # A full spaCy pipeline for biomedical data with a ~100k vocabulary.
 # https://s3-us-west-2.amazonaws.com/ai2-s2-scispacy/releases/v0.4.0/en_core_sci_sm-0.4.0.tar.gz
 # A full spaCy pipeline for biomedical data with a ~360k vocabulary and 50k word vectors.
-https://s3-us-west-2.amazonaws.com/ai2-s2-scispacy/releases/v0.4.0/en_core_sci_md-0.4.0.tar.gz
+#https://s3-us-west-2.amazonaws.com/ai2-s2-scispacy/releases/v0.4.0/en_core_sci_md-0.4.0.tar.gz
 # A full spaCy pipeline for biomedical data with a ~785k vocabulary and 600k word vectors.
 # https://s3-us-west-2.amazonaws.com/ai2-s2-scispacy/releases/v0.4.0/en_core_sci_lg-0.4.0.tar.gz
 
 # A spaCy NER model trained on the CRAFT corpus.
 # https://s3-us-west-2.amazonaws.com/ai2-s2-scispacy/releases/v0.4.0/en_ner_craft_md-0.4.0.tar.gz
 # A spaCy NER model trained on the JNLPBA corpus.
-https://s3-us-west-2.amazonaws.com/ai2-s2-scispacy/releases/v0.4.0/en_ner_jnlpba_md-0.4.0.tar.gz
+#https://s3-us-west-2.amazonaws.com/ai2-s2-scispacy/releases/v0.4.0/en_ner_jnlpba_md-0.4.0.tar.gz
 # A spaCy NER model trained on the BC5CDR corpus.
 https://s3-us-west-2.amazonaws.com/ai2-s2-scispacy/releases/v0.4.0/en_ner_bc5cdr_md-0.4.0.tar.gz
 # A spaCy NER model trained on the BIONLP13CG corpus.

@@ -22,9 +22,10 @@ EntityMap = Dict[str, List[dict]]
 
 # Models enabled in this list must also be installed.
 # See requirements.txt for the corresponding packages.
-_models = ['en_core_sci_md',
+# Warning: models can be very memory consuming. Make sure your environment support the memory usage.
+_models = [#'en_core_sci_md',
            #'en_ner_craft_md',
-           'en_ner_jnlpba_md',
+           #'en_ner_jnlpba_md',
            'en_ner_bc5cdr_md',
            #'en_ner_bionlp13cg_md'
 ]
