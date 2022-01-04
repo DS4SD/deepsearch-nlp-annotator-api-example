@@ -33,3 +33,5 @@ pydantic==1.8.2
 aioredis[hiredis]==2.0.0
 requests~=2.24.0
 pytest
+tabulate
+alive_progress
