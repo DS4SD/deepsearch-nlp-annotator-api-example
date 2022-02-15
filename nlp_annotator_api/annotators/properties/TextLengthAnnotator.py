@@ -1,5 +1,7 @@
+from nlp_annotator_api.annotators.AbstractAnnotator import AbstractAnnotator
 
-class TextLengthAnnotator:
+
+class TextLengthAnnotator(AbstractAnnotator):
 
     def key(self) -> str:
         return "length"

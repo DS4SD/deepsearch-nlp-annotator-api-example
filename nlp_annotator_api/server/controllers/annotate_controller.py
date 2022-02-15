@@ -221,7 +221,8 @@ def _run_annotator(annot, body):
             'relationship_names': [],
             'property_names': [],
             'supported_object_types': annot.supports,
-            'labels': []
+            'labels': [],
+            'annotator_metadata': annot.annotator_metadata().to_dict()
         }
 
         if features.get('entity_names'):

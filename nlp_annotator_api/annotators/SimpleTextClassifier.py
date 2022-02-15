@@ -7,6 +7,9 @@
 ## the only function you really have to change here is "annotate_entities_text".
 
 import logging
+
+from .AbstractAnnotator import AbstractAnnotator
+
 logger = logging.getLogger('cps-nlp')
 from typing import List, Optional
 #import pprint ## For debugging only.
@@ -14,7 +17,7 @@ from typing import List, Optional
 from .properties.TextLengthAnnotator import TextLengthAnnotator
 
 
-class SimpleTextClassifier:
+class SimpleTextClassifier(AbstractAnnotator):
     ## This is the class name that you need to use in the controller.
 
     supports = ('text', )

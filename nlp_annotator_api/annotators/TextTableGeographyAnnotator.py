@@ -7,6 +7,9 @@
 ## the only function you really have to change here is "annotate_entities_text".
 
 import logging
+
+from .AbstractAnnotator import AbstractAnnotator
+
 logger = logging.getLogger('cps-nlp')
 from typing import List, Optional
 #import pprint ## For debugging only.
@@ -20,7 +23,7 @@ from .relationships.CitiesToProvinciesAnnotator import CitiesToProvinciesAnnotat
 from .relationships.ProvinciesToCountriesAnnotator import ProvinciesToCountriesAnnotator
 
 
-class TextTableGeographyAnnotator:
+class TextTableGeographyAnnotator(AbstractAnnotator):
     ## This is the class name that you need to use in the controller.
 
     supports = ('text', 'table', )

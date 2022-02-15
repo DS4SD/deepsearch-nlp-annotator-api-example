@@ -2,7 +2,10 @@
 from abc import ABC, abstractmethod
 from typing import Any, Optional
 
-class BaseTextEntityAnnotator(ABC):
+from nlp_annotator_api.annotators.AbstractAnnotator import AbstractAnnotator
+
+
+class BaseTextEntityAnnotator(AbstractAnnotator):
 
     @abstractmethod
     def key(self) -> str:

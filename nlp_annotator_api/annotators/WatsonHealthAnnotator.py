@@ -5,6 +5,8 @@ import requests
 from typing import Optional, Any, List, Dict
 from json import JSONDecodeError
 from requests.auth import HTTPBasicAuth
+
+from nlp_annotator_api.annotators.AbstractAnnotator import AbstractAnnotator
 from nlp_annotator_api.config.config import conf
 
 _camel_case_pattern = re.compile(r'(?<!^)(?=[A-Z])')
@@ -18,7 +20,7 @@ def _kebab_case(text):
     return _camel_case_pattern.sub('-', text).lower()
 
 
-class WatsonHealthAnnotator:
+class WatsonHealthAnnotator(AbstractAnnotator):
     supports = ('text',)
 
     @staticmethod

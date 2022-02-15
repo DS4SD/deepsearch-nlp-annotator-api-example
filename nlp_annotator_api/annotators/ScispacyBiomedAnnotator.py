@@ -8,6 +8,8 @@ from typing import Optional, List, Dict
 
 import spacy
 
+from nlp_annotator_api.annotators.AbstractAnnotator import AbstractAnnotator
+
 logger = logging.getLogger('cps-nlp')
 
 EntityMap = Dict[str, List[dict]]
@@ -31,7 +33,7 @@ _models = [#'en_core_sci_md',
 ]
 
 
-class ScispacyBiomedAnnotator:
+class ScispacyBiomedAnnotator(AbstractAnnotator):
 
     supports = ('text', 'table', )
 
