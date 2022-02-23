@@ -50,12 +50,12 @@ Following the steps above will deploy the model with default settings. It is hig
 
 1. Open the Code Engine configuation of the model and click on "Edit and create new revision"
 2. Select the tab "Environment variables"
-![cps](.readme_resources/code-engine-env-1.png)
+![cps](../../.readme_resources/code-engine-env-1.png)
 
 3. Add a new environment variable
   - Name: `auth`
   - Value: something like `{"api_key": "super-secret-key-123"}`, where you replace `super-secret-key-123` with your own secret.
-<img src='.readme_resources/code-engine-env-2.png' width='250'>
+<img src='../../.readme_resources/code-engine-env-2.png' width='250'>
 
 4. Confirm the new variable and save the new Code Engine configuration.
 
