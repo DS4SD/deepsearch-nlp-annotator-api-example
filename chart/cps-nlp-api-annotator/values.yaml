@@ -29,9 +29,16 @@ serviceAccount:
 instrumentation:
   active: true
   statsdExporter:
-    image: prom/statsd-exporter:v0.15.0
+    image: prom/statsd-exporter:v0.21.0
   statsdPort: 9125
   useServiceMonitor: false
+  resources:
+    limits:
+      cpu: 500m
+      memory: 256Mi
+    requests:
+      cpu: 250m
+      memory: 128Mi
 
 podAnnotations: {}
 
