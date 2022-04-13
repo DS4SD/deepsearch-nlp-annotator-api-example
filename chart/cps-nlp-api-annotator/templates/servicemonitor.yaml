@@ -12,5 +12,5 @@ spec:
       scheme: http
   selector:
     matchLabels:
-      {{- include "cps-nlp-api.selectorLabels" . | nindent 4 -}}
+      {{- include "cps-nlp-api.selectorLabels" . | nindent 6 -}}
 {{- end -}}
