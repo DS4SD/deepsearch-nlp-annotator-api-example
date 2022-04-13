@@ -11,5 +11,6 @@ spec:
       port: "metrics"
       scheme: http
   selector:
-    {{- include "cps-nlp-api.selectorLabels" . | nindent 4 -}}
+    matchLabels:
+      {{- include "cps-nlp-api.selectorLabels" . | nindent 4 -}}
 {{- end -}}
