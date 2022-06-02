@@ -33,4 +33,4 @@ aiohttp_app.cleanup_ctx.append(redis_cache_factory(conf))
 aiohttp_app.middlewares.append(StatsdMiddleware())
 
 if __name__ == "__main__":
-    app.run(access_log=access_log)
+    app.run(access_log=access_log, access_log_format='%a %t "%r" %s %b %Tf "%{Referer}i" "%{User-Agent}i"')    
