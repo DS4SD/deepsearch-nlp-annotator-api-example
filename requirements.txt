@@ -1,8 +1,9 @@
 # API
-aiohttp~=3.7.4
+aiohttp~=3.8.1
 connexion[swagger-ui]~=2.7.0
 aiohttp_jinja2~=1.5.0
 jinja2~=3.1.1
+openapi-spec-validator==0.4.0
 
 # Metrics
 statsd~=3.3.0
@@ -32,8 +33,8 @@ https://s3-us-west-2.amazonaws.com/ai2-s2-scispacy/releases/v0.4.0/en_ner_bc5cdr
 
 pydantic==1.8.2
 dataclasses-json<0.6.0,>=0.5.0
-aioredis[hiredis]==2.0.0
-requests~=2.24.0
+redis~=4.3.4
+requests~=2.28.1
 pytest
 tabulate
 alive_progress
