@@ -1,7 +1,7 @@
 import logging
 from typing import Optional
 from nlp_annotator_api.config.config import Config, RedisCacheConfig
-import aioredis
+from redis import asyncio as aioredis
 
 _log = logging.getLogger(__name__)
 
